@@ -1,10 +1,10 @@
-#include "./src/Main.h"
+#include "./Main.h"
 #include <stdio.h>
 
 int main(void) {
 
-  /*vérifier si il faut instancier choix_utilisateur*/
-  
+  short userInput;
+
   do {
     printf("========== MA PETITE MEDIATHEQUE ==========\n");
     printf("1 : Ajouter un livre\n");
@@ -12,6 +12,7 @@ int main(void) {
     printf("3 : Rechercher un livre\n");
     printf("0 : Quitter\n");
     printf("Saisissez votre choix :\n");
+    userInput = scanf("Saisissez votre choix : %d", &userInput);
 
     /* recupérer choix utilisateur et valider conformité + ajouter les IF ou SWITCH des differents resultat*/
   
