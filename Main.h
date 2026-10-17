@@ -2,6 +2,7 @@
 #define MAIN_H
 
 #include <stdbool.h>
+#include <stddef.h>
 
 typedef struct {
     int id;
@@ -11,7 +12,8 @@ typedef struct {
     bool disponible;
 } Livre;
 
-void Menu(short choixMenu);
+void Menu();
 void afficherCollection(Livre collection[], int taille);
+short lire(char *saisie, size_t taille, short nbChoix);
 
 #endif

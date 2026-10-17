@@ -1,10 +1,16 @@
 #include "../Main.h"
 #include <stdio.h>
-#include <stdbool.h>
+#include <stdlib.h>
+// #include <errno.h>
+// #include <limits.h>
+#include <string.h>
 
-void Menu(short choixMenu)
-{ 
-  Livre bibli[4] = {
+void Menu()
+{
+  short choixMenu = -1;
+  char saisie[100];
+
+  Livre bibli[6] = {
   {
     1,
     "Harry Potter a l'ecole des sorciers",
@@ -43,35 +49,38 @@ void Menu(short choixMenu)
     printf("0 : Quitter\n");
     printf("Saisissez votre choix :\n");
     
-    /* recupérer choix utilisateur et valider conformité + ajouter les IF ou SWITCH des differents resultat*/
-    if(scanf("%hd", &choixMenu) != 1) {
-      printf("\nERREUR : veuillez saisir un entier.\n");
+    // LIRE choix_menu
+    choixMenu = lire(saisie, sizeof(saisie), 4);
+    printf("choixMenu%d\n", choixMenu);
 
-      int c;
-      while ((c = getchar()) != '\n' && c != EOF) {
-      }
-      choixMenu = -1;
+    if (choixMenu == -1) {
+      break;
+    }
+    if (choixMenu == -2) {
       continue;
     }
-    
-    if (choixMenu < 0 || choixMenu > 3) {
-      printf("\nERREUR : choisir un entier entre 0 et 3.\n");
-    } else {
-      switch (choixMenu) {
-        case 1:
-          printf("Ajout element\n");
-          break;
-        case 2:
-          printf("Afficher les livres\n");
-          afficherCollection(bibli, sizeof(bibli) / sizeof(bibli[0]));
-          break;
-        case 3:
-          printf("Rechercher un livre\n");
-          break;
-        case 0:
-          printf("Quitter\n");
-          break;
-      }
+    // fin LIRE choix_menu
+
+    // if (choixMenu < 0 || choixMenu > 3) {
+    //   printf("\nERREUR : veuillez choisir un entier entre 0 et 3.\n");
+    // } else {
+    switch (choixMenu) {
+      case 1:
+        printf("\n-> Ajout element\n");
+        printf("Not implemented yet\n");
+        break;
+      case 2:
+        printf("\n-> Afficher les livres\n");
+        afficherCollection(bibli, sizeof(bibli) / sizeof(bibli[0]));
+        break;
+      case 3:
+        printf("\n-> Rechercher un livre\n");
+        printf("Not implemented yet\n");
+        break;
+      case 0:
+        printf("\n-> Quitter\n");
+        break;
     }
+    // }
   } while (choixMenu != 0);
 }

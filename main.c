@@ -2,10 +2,7 @@
 #include <stdio.h>
 
 int main(void) {
-
-  short choixMenu;
-  choixMenu = -1;
-  Menu(choixMenu);
+  Menu();
 	return 0;
 }
 
@@ -15,4 +12,4 @@ int main(void) {
 // gcc -Wall -Wextra -o main main.c
 // gcc -Wall -Wextra main.c src/Menu.c -o main
 
-// gcc -Wall -Wextra main.c functions/* -o main
+// gcc -Wall -Wextra main.c functions/* -o main && ./main
