@@ -12,4 +12,5 @@ int main(void) {
 // gcc -Wall -Wextra -o main main.c
 // gcc -Wall -Wextra main.c src/Menu.c -o main
 
+// pour tout compiler et exécuter:
 // gcc -Wall -Wextra main.c functions/* -o main && ./main
