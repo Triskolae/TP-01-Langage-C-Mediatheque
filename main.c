@@ -14,3 +14,5 @@ int main(void) {
 
 // pour tout compiler et exécuter:
 // gcc -Wall -Wextra main.c functions/* -o main && ./main
+
+// gérer le ENTRER différement du 0
