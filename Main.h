@@ -22,11 +22,19 @@ void afficherMenuConfirmation(void);
 void afficherMenuCorrection(void);
 
 // Affichage des livres (src/afficher.c)
-void afficherCollection(Livre collection[], int taille);
+void afficher(Livre collection[], int taille);
 void afficherTous(Livre collection[], int taille);
 void afficherParEtat(Livre collection[], int taille, bool disponible);
 
+// Recherche des livres (src/rechercher.c)
+void rechercher(Livre collection[], int taille);
+void rechercherParId(Livre collection[], int taille);
+void rechercherParTitre(Livre collection[], int taille);
+void rechercherParAuteur(Livre collection[], int taille);
+
 // Lecture des saisies (src/lire.c)
-short lire(char *saisie, size_t taille, short nbChoix);
+short lireChoixMenu(char *saisie, size_t taille, short nbChoix);
+int lireInt(char *saisie, size_t taille);
+char* lireString();
 
 #endif

@@ -19,7 +19,7 @@ int main(void) {
     };
 
     int nbLivres = 3;
-    int prochainId = 4;
+    // int prochainId = 4;
 
     short choixMenu = -1;
     char saisie[100];
@@ -33,7 +33,7 @@ int main(void) {
         printf("0 : Quitter\n");
         printf("Saisissez votre choix : ");
 
-        choixMenu = lire(saisie, sizeof(saisie), 4);
+        choixMenu = lireChoixMenu(saisie, sizeof(saisie), 4);
 
         if (choixMenu == -1) {
             printf("\nFin de la saisie.\n");
@@ -53,12 +53,12 @@ int main(void) {
 
             case 2:
                 // Fonction définie dans src/afficher.c
-                afficherCollection(collection, nbLivres);
+                afficher(collection, nbLivres);
                 break;
 
             case 3:
                 // Fonction à créer dans src/rechercher.c
-                printf("\nRecherche : à implémenter.\n");
+                rechercher(collection, nbLivres);
                 break;
 
             case 0:
@@ -78,6 +78,6 @@ int main(void) {
 // gcc -Wall -Wextra main.c src/Menu.c -o main
 
 // pour tout compiler et exécuter:
-// gcc -Wall -Wextra main.c functions/* -o main && ./main
+// gcc -Wall -Wextra main.c src/* -o main && ./main
 
 // gérer le ENTRER différement du 0
