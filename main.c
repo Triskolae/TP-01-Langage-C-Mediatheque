@@ -15,10 +15,13 @@ int main(void) {
          "Une aventure sur la planète Arrakis.", true},
 
         {3, "L'Assassin Royal", "Robin Hobb",
-         "L'histoire de Fitz.", false}
+         "L'histoire de Fitz.", false},
+
+        {4, "Dune 2", "Frank Herbert",
+         "Une autre aventure sur la planète Arrakis.", false},
     };
 
-    int nbLivres = 3;
+    int nbLivres = 4;
     // int prochainId = 4;
 
     short choixMenu = -1;

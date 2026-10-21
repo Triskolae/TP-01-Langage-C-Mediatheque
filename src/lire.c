@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <string.h>
 #include <limits.h>
+#include <ctype.h>
 
 short lireChoixMenu(char *saisie, size_t taille, short nbChoix) {
   if (fgets(saisie, taille, stdin) == NULL) {
@@ -64,7 +66,52 @@ int lireInt(char *saisie, size_t taille) {
     return (int)valeur;
 }
 
-char* lireString() {
-  printf("lireString\n");
-  return "wello horld";
+char *lireChaine(char *saisie, size_t taille) {
+    if (saisie == NULL || taille < 2) {
+        return NULL;
+    }
+
+    if (fgets(saisie, taille, stdin) == NULL) {
+        return NULL; // EOF ou erreur de lecture
+    }
+
+    // Recherche et suppression du '\n'
+    char *p = strchr(saisie, '\n');
+
+    if (p != NULL) {
+        *p = '\0';
+    } else {
+        // La saisie a dépassé le buffer : on vide le tampon stdin
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
+    }
+
+    // Gestion du cas où l'utilisateur tape juste Entrée
+    if (saisie[0] == '\0') {
+        printf("\nERREUR : la saisie ne peut pas être vide.\n");
+        return NULL;
+    }
+
+    return saisie; // Retourne le pointeur vers la chaîne valide
+}
+
+char *comparerChaines(char *chaine, char *sousChaine) {
+    if (!*sousChaine) return chaine;
+
+    for (; *chaine != '\0'; chaine++) {
+        const char *h = chaine;
+        const char *n = sousChaine;
+
+        // Compare caractère par caractère en minuscules
+        while (*h && *n && (tolower((unsigned char)*h) == tolower((unsigned char)*n))) {
+            h++;
+            n++;
+        }
+
+        if (!*n) {
+            return chaine;
+        }
+    }
+
+    return NULL;
 }

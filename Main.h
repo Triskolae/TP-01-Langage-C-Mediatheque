@@ -35,6 +35,7 @@ void rechercherParAuteur(Livre collection[], int taille);
 // Lecture des saisies (src/lire.c)
 short lireChoixMenu(char *saisie, size_t taille, short nbChoix);
 int lireInt(char *saisie, size_t taille);
-char* lireString();
+char *lireChaine(char *saisie, size_t taille);
+char *comparerChaines(char *chaine, char *sousChaine);
 
 #endif

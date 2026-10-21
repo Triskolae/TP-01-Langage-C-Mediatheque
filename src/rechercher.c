@@ -31,8 +31,7 @@ void rechercher(Livre collection[], int taille) {
                 break;
 
             case 2:
-                //
-                printf("Not implemented yet.\n");
+                rechercherParTitre(collection, taille);
                 break;
 
             case 3:
@@ -51,7 +50,7 @@ void rechercher(Livre collection[], int taille) {
 }
 
 void rechercherParId(Livre collection[], int taille) {
-    printf("Veuillez entrer l'id du media recherché: ");
+    printf("Veuillez entrer l'id du média recherché: ");
     int idRecherche = 0;
     char saisie[100];
     bool found = false;
@@ -74,23 +73,24 @@ void rechercherParId(Livre collection[], int taille) {
         i++;
     }
     if (!found && idRecherche != 0) {
-        printf("Aucun media trouvé pour l'id %d\n", idRecherche);
+        printf("Aucun média trouvé pour l'id %d\n", idRecherche);
     }
 }
 
-// par titre ou auteur
 void rechercherParTitre(Livre collection[], int taille) {
-    
-    char saisie[100];
-    // fgets lireString
-    strcpy(saisie, lireString());
+    printf("Veuillez entrer le titre du média recherché: ");
 
-    printf("rechercherParTitre - saisie: %s\n", saisie);
+    char saisie[100];
+
+    if (lireChaine(saisie, sizeof(saisie)) == NULL) {
+        printf("Saisie invalide.\n");
+        return;
+    }
 
     int i = 0;
 
     while (i < taille) {
-        if (collection[i].id == *saisie) {
+        if (comparerChaines(collection[i].titre, saisie) != NULL) {
             printf("\nID : %d\n", collection[i].id);
             printf("Titre : %s\n", collection[i].titre);
             printf("Auteur : %s\n", collection[i].auteur);
