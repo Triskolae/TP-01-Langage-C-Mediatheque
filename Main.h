@@ -7,6 +7,12 @@
 
 #define TAILLE_MAX 100
 
+typedef enum {
+    CHAMP_TITRE,
+    CHAMP_AUTEUR
+} ChampTexte;
+
+
 typedef struct {
     int id;
     char titre[50];
@@ -29,8 +35,7 @@ void afficherParEtat(Livre collection[], int taille, bool disponible);
 // Recherche des livres (src/rechercher.c)
 void rechercher(Livre collection[], int taille);
 void rechercherParId(Livre collection[], int taille);
-void rechercherParTitre(Livre collection[], int taille);
-void rechercherParAuteur(Livre collection[], int taille);
+void rechercherParChampTexte(Livre collection[], int taille, ChampTexte champ);
 
 // Lecture des saisies (src/lire.c)
 short lireChoixMenu(char *saisie, size_t taille, short nbChoix);

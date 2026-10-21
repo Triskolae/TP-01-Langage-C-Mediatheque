@@ -31,12 +31,11 @@ void rechercher(Livre collection[], int taille) {
                 break;
 
             case 2:
-                rechercherParTitre(collection, taille);
+                rechercherParChampTexte(collection, taille, CHAMP_TITRE);
                 break;
 
             case 3:
-                //
-                printf("Not implemented yet.\n");
+                rechercherParChampTexte(collection, taille, CHAMP_AUTEUR);
                 break;
 
             case 0:
@@ -77,8 +76,9 @@ void rechercherParId(Livre collection[], int taille) {
     }
 }
 
-void rechercherParTitre(Livre collection[], int taille) {
-    printf("Veuillez entrer le titre du média recherché: ");
+void rechercherParChampTexte(Livre collection[], int taille, ChampTexte champ) {
+    const char *nomChamp = (champ == CHAMP_AUTEUR) ? "l'auteur" : "le titre";
+    printf("Veuillez entrer %s du média recherché : ", nomChamp);
 
     char saisie[100];
 
@@ -86,11 +86,25 @@ void rechercherParTitre(Livre collection[], int taille) {
         printf("Saisie invalide.\n");
         return;
     }
-
+    
+    if (strlen(saisie) < 3) {
+        printf("Erreur : la recherche doit contenir au moins 3 caractères.\n");
+        return;
+    }
     int i = 0;
 
     while (i < taille) {
-        if (comparerChaines(collection[i].titre, saisie) != NULL) {
+        char *chaineAComparer = NULL;
+        switch (champ) {
+            case CHAMP_TITRE:
+                chaineAComparer = collection[i].titre;
+                break;
+            case CHAMP_AUTEUR:
+                chaineAComparer = collection[i].auteur;
+                break;
+        }
+
+        if (chaineAComparer != NULL && comparerChaines(chaineAComparer, saisie) != NULL) {
             printf("\nID : %d\n", collection[i].id);
             printf("Titre : %s\n", collection[i].titre);
             printf("Auteur : %s\n", collection[i].auteur);
