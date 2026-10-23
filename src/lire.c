@@ -34,31 +34,59 @@ short lireChoixMenu(char *saisie, size_t taille, short nbChoix) {
   return (short)valeur;
 }
 
+
 int lireInt(char *saisie, size_t taille) {
+
+    // Verifier que le tableau de saisie est valide
+    if (saisie == NULL || taille < 2) {
+        return 0;
+    }
+
+    // Lire la saisie utilisateur
     if (fgets(saisie, taille, stdin) == NULL) {
         return 0; // EOF ou erreur de lecture
     }
 
+    // Verifier si la saisie depasse la capacite du tableau
+    if (strchr(saisie, '\n') == NULL && !feof(stdin)) {
+        int caractere = getchar();
+
+        if (caractere != '\n' && caractere != EOF) {
+
+            // Vider le reste de la ligne pour ne pas perturber la prochaine saisie
+            while (caractere != '\n' && caractere != EOF) {
+                caractere = getchar();
+            }
+
+            printf("\nERREUR : saisie trop longue.\n");
+            return 0;
+        }
+    }
+
+    // Convertir la saisie en entier non signe
     char *fin;
     errno = 0;
-    long valeur = strtoul(saisie, &fin, 10);
+    unsigned long valeur = strtoul(saisie, &fin, 10);
 
-    // Ignorer les espaces et sauts de ligne à la fin
+    // Ignorer les espaces et retours a la ligne apres le nombre
     while (*fin == ' ' || *fin == '\t' || *fin == '\n' || *fin == '\r') {
         fin++;
     }
 
-    // Vérification de la validité
-    // Note : strtoul accepte le signe '-' (ex: "-1" devient ULONG_MAX - 1).
-    // On vérifie donc aussi que le premier caractère non-espace n'est pas '-'
+    // Reperer le premier caractere non-espace
+    // strtoul accepte le signe '-', mais nous refusons les valeurs negatives
     char *debut = saisie;
     while (*debut == ' ' || *debut == '\t') {
         debut++;
     }
 
-    if (fin == saisie || *fin != '\0' || 
-        errno == ERANGE || valeur > UINT_MAX || 
-        *debut == '-' || *debut == '\n') {
+    // Verifier la conversion et la compatibilite avec le type int
+    if (fin == debut ||
+        *fin != '\0' ||
+        errno == ERANGE ||
+        valeur > INT_MAX ||
+        *debut == '-') {
+
         printf("\nERREUR : veuillez saisir un entier valide.\n");
         return 0;
     }
