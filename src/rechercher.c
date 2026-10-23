@@ -1,8 +1,6 @@
 #include "../Livre.h"
 #include <stdio.h>
 #include <string.h>
-#include <limits.h>
-#include <stdbool.h>
 
 void rechercher(Livre collection[], int taille) {
     short choixMenu = -1;

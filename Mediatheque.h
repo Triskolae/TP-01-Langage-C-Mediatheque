@@ -3,6 +3,11 @@
 
 #include "Livre.h"
 
-// Structure Mediatheque à définir ultérieurement
+// Structure regroupant les donnees de la mediatheque
+typedef struct {
+    Livre collection[TAILLE_MAX];
+    int nbLivres;
+    int prochainId;
+} Mediatheque;
 
 #endif

@@ -1,7 +1,5 @@
-#include "../Livre.h"
 #include "../Menu.h"
 #include <stdio.h>
-#include <stdlib.h>
 
 
 // Gestion du menu principal de la mediatheque

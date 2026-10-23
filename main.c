@@ -1,31 +1,20 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include "Livre.h"
 #include "Menu.h"
+#include "Mediatheque.h"
 
 int main(void) {
 
-    // Collection de démonstration
-    Livre collection[TAILLE_MAX] = {
-        {1, "Harry Potter", "J.K. Rowling", 1997,
-         "Un jeune sorcier découvre Poudlard.", true},
+    // Initialiser une mediatheque vide
+    Mediatheque mediatheque = {0};
 
-        {2, "Dune", "Frank Herbert", 1965,
-         "Une aventure sur la planète Arrakis.", true},
+    // Le premier livre ajouté recevra l'identifiant 1
+    mediatheque.prochainId = 1;
 
-        {3, "L'Assassin Royal", "Robin Hobb", 1995,
-         "L'histoire de Fitz.", false},
-
-        {4, "Dune 2", "Frank Herbert", 1969,
-         "Une autre aventure sur la planète Arrakis.", false},
-    };
-
-    int nbLivres = 4;
-    int prochainId = 5;
-
-    lancerMenuPrincipal(collection, &nbLivres, &prochainId);
+    // Lancer le menu principal
+    lancerMenuPrincipal(
+        mediatheque.collection,
+        &mediatheque.nbLivres,
+        &mediatheque.prochainId
+    );
 
     return 0;
 }
