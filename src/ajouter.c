@@ -170,7 +170,7 @@ void ajouterLivre(Livre collection[], int * const nbLivres, int * const prochain
                 choixCorrection = lireChoixMenu(
                     saisieCorrection,
                     sizeof saisieCorrection,
-                    4
+                    5
                 );
 
                 if (choixCorrection == -1) {
@@ -185,8 +185,39 @@ void ajouterLivre(Livre collection[], int * const nbLivres, int * const prochain
                 if (choixCorrection == 0) {
                     break;
                 }
+                
+                // correction de l'ANNEE DE UBLICATION
+                if (choixCorrection == 4) {
 
-                // Nous traiterons ici la modification de champ:
+                    // L'annee est un short : sa correction est traitee separement des champs texte dans le switch suivant
+                    do {
+                        char saisieAnnee[20];
+
+                        printf("Saisissez la nouvelle année de publication : ");
+                        int anneeSaisie = lireInt(saisieAnnee, sizeof saisieAnnee);
+
+                        // Verifier que la valeur peut etre stockee dans un short
+                        if (anneeSaisie >= 1 && anneeSaisie <= SHRT_MAX) {
+                            nouveauLivre.annee = (short)anneeSaisie;
+                            printf("Année corrigée avec succès.\n");
+                            break;
+                        }
+
+                        if (feof(stdin) || ferror(stdin)) {
+                            printf("Lecture interrompue : ajout annulé.\n");
+                            return;
+                        }
+
+                        printf("ERREUR : année invalide.\n");
+
+                    } while (1);
+
+                    // Revenir au menu de correction
+                    continue;
+                }
+
+
+                // Correction des champs textuels : titre, auteur et description
                 char *champ = NULL;
                 size_t tailleChamp = 0;
                 const char *nomChamp = NULL;
@@ -250,7 +281,8 @@ void ajouterLivre(Livre collection[], int * const nbLivres, int * const prochain
         
         // CHOIX UTILISATEUR valide: CONFIRMATION
         if (choix == 1) {
-            // A implementer : identifiant, disponibilite, enregistrement dans collection et compteur
+            
+            // Attribuer un identifiant, rendre le livre disponible et l'ajouter a la collection
 
             nouveauLivre.id = *prochainId;
             nouveauLivre.disponible = true;

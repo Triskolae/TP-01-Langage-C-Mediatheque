@@ -37,7 +37,7 @@ short lireChoixMenu(char *saisie, size_t taille, short nbChoix) {
 
 int lireInt(char *saisie, size_t taille) {
 
-    // Verifier que le tableau de saisie est valide
+    // Verifie que le tableau de saisie est valide
     if (saisie == NULL || taille < 2) {
         return 0;
     }
@@ -47,13 +47,13 @@ int lireInt(char *saisie, size_t taille) {
         return 0; // EOF ou erreur de lecture
     }
 
-    // Verifier si la saisie depasse la capacite du tableau
+    // Verifie si la saisie dépasse la capacite du tableau
     if (strchr(saisie, '\n') == NULL && !feof(stdin)) {
         int caractere = getchar();
 
         if (caractere != '\n' && caractere != EOF) {
 
-            // Vider le reste de la ligne pour ne pas perturber la prochaine saisie
+            // Vide le reste de la ligne pour ne pas perturber la prochaine saisie
             while (caractere != '\n' && caractere != EOF) {
                 caractere = getchar();
             }
@@ -63,24 +63,23 @@ int lireInt(char *saisie, size_t taille) {
         }
     }
 
-    // Convertir la saisie en entier non signe
+    // Conversion de la saisie en entier non signé
     char *fin;
     errno = 0;
     unsigned long valeur = strtoul(saisie, &fin, 10);
 
-    // Ignorer les espaces et retours a la ligne apres le nombre
+    // Ignore les espaces et retours à la ligne apres le nombre
     while (*fin == ' ' || *fin == '\t' || *fin == '\n' || *fin == '\r') {
         fin++;
     }
 
-    // Reperer le premier caractere non-espace
-    // strtoul accepte le signe '-', mais nous refusons les valeurs negatives
+    // Reperes le premier caractere non-espace. strtoul accepte le signe '-', mais nous refusons les valeurs negatives
     char *debut = saisie;
     while (*debut == ' ' || *debut == '\t') {
         debut++;
     }
 
-    // Verifier la conversion et la compatibilite avec le type int
+    // Verifie la conversion et la compatibilité avec le type int
     if (fin == debut ||
         *fin != '\0' ||
         errno == ERANGE ||

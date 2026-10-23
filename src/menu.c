@@ -91,6 +91,7 @@ void afficherMenuCorrection(void) {
     printf("1 : Corriger le titre\n");
     printf("2 : Corriger l'auteur\n");
     printf("3 : Corriger la description\n");
+    printf("4 - Corriger l'année\n");
     printf("0 : Revenir au recapitulatif\n");
     printf("Saisissez votre choix : ");
 }
