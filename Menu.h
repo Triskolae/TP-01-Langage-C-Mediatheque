@@ -3,6 +3,6 @@
 
 #include "Livre.h"
 
-void lancerMenuPrincipal(Livre collection[], int nbLivres);
+void lancerMenuPrincipal(Livre collection[], int * const nbLivres, int * const prochainId);
 
 #endif

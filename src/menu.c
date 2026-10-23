@@ -4,8 +4,8 @@
 #include <stdlib.h>
 
 
- // Gestion du menu principal de la mediatheque
-void lancerMenuPrincipal(Livre collection[], int nbLivres) {
+// Gestion du menu principal de la mediatheque
+void lancerMenuPrincipal(Livre collection[], int * const nbLivres, int * const prochainId) {
     short choixMenu = -1;
     char saisie[100];
 
@@ -32,17 +32,17 @@ void lancerMenuPrincipal(Livre collection[], int nbLivres) {
         switch (choixMenu) {
             case 1:
                 // Fonction à créer dans src/ajouter.c
-                printf("\nAjout : à implémenter.\n");
+                ajouterLivre(collection, nbLivres, prochainId);
                 break;
 
             case 2:
                 // Fonction définie dans src/afficher.c
-                afficher(collection, nbLivres);
+                afficher(collection, *nbLivres);
                 break;
 
             case 3:
                 // Fonction à créer dans src/rechercher.c
-                rechercher(collection, nbLivres);
+                rechercher(collection, *nbLivres);
                 break;
 
             case 0:

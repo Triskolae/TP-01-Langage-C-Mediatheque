@@ -9,23 +9,23 @@ int main(void) {
 
     // Collection de démonstration
     Livre collection[TAILLE_MAX] = {
-        {1, "Harry Potter", "J.K. Rowling",
+        {1, "Harry Potter", "J.K. Rowling", 1997,
          "Un jeune sorcier découvre Poudlard.", true},
 
-        {2, "Dune", "Frank Herbert",
+        {2, "Dune", "Frank Herbert", 1965,
          "Une aventure sur la planète Arrakis.", true},
 
-        {3, "L'Assassin Royal", "Robin Hobb",
+        {3, "L'Assassin Royal", "Robin Hobb", 1995,
          "L'histoire de Fitz.", false},
 
-        {4, "Dune 2", "Frank Herbert",
+        {4, "Dune 2", "Frank Herbert", 1969,
          "Une autre aventure sur la planète Arrakis.", false},
     };
 
     int nbLivres = 4;
-    // int prochainId = 4;
+    int prochainId = 5;
 
-    lancerMenuPrincipal(collection, nbLivres);
+    lancerMenuPrincipal(collection, &nbLivres, &prochainId);
 
     return 0;
 }

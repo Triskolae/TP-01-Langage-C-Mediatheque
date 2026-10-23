@@ -14,11 +14,15 @@ typedef enum {
 
 typedef struct {
     int id;
-    char titre[50];
-    char auteur[50];
+    char titre[100];
+    char auteur[100];
+    short annee;
     char description[200];
     bool disponible;
 } Livre;
+
+// Ajout de livres (src/ajouter.c)
+void ajouterLivre(Livre collection[], int * const nbLivres, int * const prochainId);
 
 // Sous-menus (src/menu.c)
 void afficherMenuAffichage(void);

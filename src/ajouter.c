@@ -1,6 +1,7 @@
 #include "../Livre.h"
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
 
 // Procédure de réaffichage du réacapitulatif de saisie utilisateur, propre a l'operation d'ajout d'un livre
 static void afficherRecapitulatifAjout(const Livre * const livre) {
@@ -11,17 +12,18 @@ static void afficherRecapitulatifAjout(const Livre * const livre) {
     printf("\n--- RECAPITULATIF DE VOTRE SAISIE ---\n");
     printf("Titre       : %s\n", livre->titre);
     printf("Auteur      : %s\n", livre->auteur);
+    printf("Année       : %hd\n", livre->annee);
     printf("Description : %s\n", livre->description);
 }
 
 
 //fonction principale AJOUT DE LIVRE :
 
-void ajouterLivre(Livre collection[], int * const nbLivres) {
+void ajouterLivre(Livre collection[], int * const nbLivres, int * const prochainId) {
 // on met int * const nbLivre car je souhaites que le pointeur ne puisse pas être redirigé vers une autre adresse dans la fonction, mais que l'on puisse modifier l'entier pointé.
 
     // Verifier que les adresses recues sont valides:
-    if (collection == NULL || nbLivres == NULL) {
+    if (collection == NULL || nbLivres == NULL || prochainId == NULL) {
         fprintf(stderr, "ERREUR : parametre invalide.\n");
         return;
     }
@@ -29,6 +31,12 @@ void ajouterLivre(Livre collection[], int * const nbLivres) {
     // Verifier la coherence du nombre de livres
     if (*nbLivres < 0 || *nbLivres > TAILLE_MAX) {
         fprintf(stderr, "ERREUR : nombre de livres invalide.\n");
+        return;
+    }
+
+    // Verifier la coherence du prochain identifiant
+    if (*prochainId <= 0 || *prochainId == INT_MAX) {
+        fprintf(stderr, "ERREUR : prochain identifiant invalide.\n");
         return;
     }
 
@@ -75,7 +83,28 @@ void ajouterLivre(Livre collection[], int * const nbLivres) {
         }
 
     } while (1);
+    
+    // Saisir ANNEE
+    do {
+        char saisieAnnee[20];
 
+        printf("Saisissez l'année de publication : ");
+
+        int anneeSaisie = lireInt(saisieAnnee, sizeof saisieAnnee);
+
+        if (anneeSaisie >= 1 && anneeSaisie <= SHRT_MAX) {
+            nouveauLivre.annee = (short)anneeSaisie;
+            break;
+        }
+
+        if (feof(stdin) || ferror(stdin)) {
+            printf("Lecture interrompue : ajout annulé.\n");
+            return;
+        }
+
+        printf("ERREUR : année invalide.\n");
+
+    } while (1);
 
     // Saisir DESCRIPTION
     do {
@@ -191,11 +220,7 @@ void ajouterLivre(Livre collection[], int * const nbLivres) {
                 }
 
                 // Lire la correction dans un tableau temporaire :
-                char correction[
-                    sizeof nouveauLivre.titre
-                    + sizeof nouveauLivre.auteur
-                    + sizeof nouveauLivre.description
-                ];
+                char correction[sizeof nouveauLivre.description];
 
                 char *resultat;
 
@@ -222,13 +247,23 @@ void ajouterLivre(Livre collection[], int * const nbLivres) {
             continue;
         }
 
+        
         // CHOIX UTILISATEUR valide: CONFIRMATION
         if (choix == 1) {
-            // A implementer : identifiant, disponibilite,
-            // enregistrement dans collection et compteur.
-            printf("Confirmation : enregistrement a implementer.\n");
+            // A implementer : identifiant, disponibilite, enregistrement dans collection et compteur
+
+            nouveauLivre.id = *prochainId;
+            nouveauLivre.disponible = true;
+
+            collection[*nbLivres] = nouveauLivre;
+
+            (*nbLivres)++;
+            (*prochainId)++;
+
+            printf("Livre ajoute avec succes (ID : %d).\n", nouveauLivre.id);
             return;
         }
+
 
     } while (1);
 }
