@@ -6,6 +6,10 @@
 #include <limits.h>
 #include <ctype.h>
 
+/**
+ * Vérifie que la saisie utilisateur correspond bien à une entrée du menu.
+ * utilisation de l'IA (Gemini) pour gérer les cas limites de saisie utilisateur
+ */
 short lireChoixMenu(char *saisie, size_t taille, short nbChoix) {
   if (fgets(saisie, taille, stdin) == NULL) {
     return -1; // EOF, ex: CTRL + D (Linux) / CTRL + Z -> Entrée (Windows)
@@ -34,7 +38,10 @@ short lireChoixMenu(char *saisie, size_t taille, short nbChoix) {
   return (short)valeur;
 }
 
-
+/**
+ * Vérifie la saisie utilisateur lorsqu'un nombre est attendu.
+ * utilisation de l'IA (Gemini) pour gérer les cas limites
+ */
 int lireInt(char *saisie, size_t taille) {
 
     // Verifie que le tableau de saisie est valide
@@ -93,7 +100,7 @@ int lireInt(char *saisie, size_t taille) {
     return (int)valeur;
 }
 
-//Spécifique aux année de pulications car elles peuvent être négatives
+// Spécifique aux année de publications car elles peuvent être négatives
 short lireAnnee(char *saisie, size_t taille) {
 
     // Verifier que le tableau de saisie est valide
@@ -141,6 +148,10 @@ short lireAnnee(char *saisie, size_t taille) {
     return (short)valeur;
 }
 
+/**
+ * Vérifie la saisie utilisateur lorsqu'une chaîne de caractères est attendue.
+ * utilisation de l'IA (Gemini) pour gérer les cas limites de saisie utilisateur
+ */
 char *lireChaine(char *saisie, size_t taille) {
     if (saisie == NULL || taille < 2) {
         return NULL;
@@ -183,7 +194,10 @@ char *lireChaine(char *saisie, size_t taille) {
     return saisie;
 }
 
-
+/**
+ * Vérifie si deux chaînes de caractères correspondent pour la recherche.
+ * utilisation de l'IA (Gemini) pour gérer les cas limites de saisie utilisateur
+ */
 const char *comparerChaines(const char *chaine, const char *sousChaine) {
     if (!*sousChaine) return chaine;
 

@@ -74,6 +74,7 @@ void rechercherParId(const Mediatheque *mediatheque) {
     }
 }
 
+// recherche par auteur ou titre selon la valeur de l'enum passé dans "champ"
 void rechercherParChampTexte(const Mediatheque *mediatheque, ChampTexte champ) {
     bool livreTrouve = false;
     const char *nomChamp = (champ == CHAMP_AUTEUR) ? "l'auteur" : "le titre";

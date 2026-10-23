@@ -6,6 +6,7 @@
 
 #define TAILLE_MAX 100
 
+// Utilisation d'un enum pour réutiliser la fonction rechercherParChampTexte()
 typedef enum {
     CHAMP_TITRE,
     CHAMP_AUTEUR

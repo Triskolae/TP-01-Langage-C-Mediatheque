@@ -3,7 +3,7 @@
 #include <string.h>
 #include <limits.h>
 
-// Procédure de réaffichage du réacapitulatif de saisie utilisateur, propre a l'operation d'ajout d'un livre
+// Procédure de réaffichage du récapitulatif de saisie utilisateur, propre a l'operation d'ajout d'un livre
 static void afficherRecapitulatifAjout(const Livre * const livre) {
     if (livre == NULL) {
         return;
