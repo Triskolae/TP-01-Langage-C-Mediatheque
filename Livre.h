@@ -11,7 +11,6 @@ typedef enum {
     CHAMP_AUTEUR
 } ChampTexte;
 
-
 typedef struct {
     int id;
     char titre[100];

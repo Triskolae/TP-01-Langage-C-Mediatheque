@@ -184,7 +184,7 @@ char *lireChaine(char *saisie, size_t taille) {
 }
 
 
-char *comparerChaines(char *chaine, char *sousChaine) {
+const char *comparerChaines(const char *chaine, const char *sousChaine) {
     if (!*sousChaine) return chaine;
 
     for (; *chaine != '\0'; chaine++) {

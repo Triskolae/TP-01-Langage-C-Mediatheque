@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include <string.h>
 
-void rechercher(Livre collection[], int taille) {
+void rechercher(const Mediatheque *mediatheque) {
     short choixMenu = -1;
     char saisie[100];
 
-    if (taille == 0) {
+    if (mediatheque->nbLivres == 0) {
         printf("La médiathèque est vide.\n");
         return;
     }
@@ -24,15 +24,15 @@ void rechercher(Livre collection[], int taille) {
                 break;
 
             case 1:
-                rechercherParId(collection, taille);
+                rechercherParId(mediatheque);
                 break;
 
             case 2:
-                rechercherParChampTexte(collection, taille, CHAMP_TITRE);
+                rechercherParChampTexte(mediatheque, CHAMP_TITRE);
                 break;
 
             case 3:
-                rechercherParChampTexte(collection, taille, CHAMP_AUTEUR);
+                rechercherParChampTexte(mediatheque, CHAMP_AUTEUR);
                 break;
 
             case 0:
@@ -45,7 +45,7 @@ void rechercher(Livre collection[], int taille) {
     } while (choixMenu != 0);
 }
 
-void rechercherParId(Livre collection[], int taille) {
+void rechercherParId(const Mediatheque *mediatheque) {
     printf("Veuillez entrer l'id du média recherché: ");
     int idRecherche = 0;
     char saisie[100];
@@ -55,14 +55,15 @@ void rechercherParId(Livre collection[], int taille) {
 
     int i = 0;
 
-    while (i < taille) {
-        if (collection[i].id == idRecherche) {
-            printf("\nID : %d\n", collection[i].id);
-            printf("Titre : %s\n", collection[i].titre);
-            printf("Auteur : %s\n", collection[i].auteur);
-            printf("Description : %s\n", collection[i].description);
-            printf("Etat : %s\n",
-                   collection[i].disponible ? "disponible" : "emprunté");
+    while (i < mediatheque->nbLivres) {
+        const Livre *livre = &mediatheque->collection[i];
+
+        if (livre->id == idRecherche) {
+            printf("\nID : %d\n", livre->id);
+            printf("Titre : %s\n", livre->titre);
+            printf("Auteur : %s\n", livre->auteur);
+            printf("Description : %s\n", livre->description);
+            printf("Etat : %s\n", livre->disponible ? "disponible" : "emprunté");
             found = true;
             break;
         }
@@ -73,7 +74,7 @@ void rechercherParId(Livre collection[], int taille) {
     }
 }
 
-void rechercherParChampTexte(Livre collection[], int taille, ChampTexte champ) {
+void rechercherParChampTexte(const Mediatheque *mediatheque, ChampTexte champ) {
     bool livreTrouve = false;
     const char *nomChamp = (champ == CHAMP_AUTEUR) ? "l'auteur" : "le titre";
     printf("Veuillez entrer %s du média recherché : ", nomChamp);
@@ -91,25 +92,26 @@ void rechercherParChampTexte(Livre collection[], int taille, ChampTexte champ) {
     }
     int i = 0;
 
-    while (i < taille) {
-        char *chaineAComparer = NULL;
+    while (i < mediatheque->nbLivres) {
+        const Livre *livre = &mediatheque->collection[i];
+
+        const char *chaineAComparer = NULL;
         switch (champ) {
             case CHAMP_TITRE:
-                chaineAComparer = collection[i].titre;
+                chaineAComparer = livre->titre;
                 break;
             case CHAMP_AUTEUR:
-                chaineAComparer = collection[i].auteur;
+                chaineAComparer = livre->auteur;
                 break;
         }
 
         if (chaineAComparer != NULL && comparerChaines(chaineAComparer, saisie) != NULL) {
             livreTrouve = true;
-            printf("\nID : %d\n", collection[i].id);
-            printf("Titre : %s\n", collection[i].titre);
-            printf("Auteur : %s\n", collection[i].auteur);
-            printf("Description : %s\n", collection[i].description);
-            printf("Etat : %s\n",
-                   collection[i].disponible ? "disponible" : "emprunté");
+            printf("\nID : %d\n", livre->id);
+            printf("Titre : %s\n", livre->titre);
+            printf("Auteur : %s\n", livre->auteur);
+            printf("Description : %s\n", livre->description);
+            printf("Etat : %s\n", livre->disponible ? "disponible" : "emprunté");
         }
 
         i++;

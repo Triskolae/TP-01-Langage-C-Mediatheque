@@ -3,7 +3,11 @@
 
 
 // Gestion du menu principal de la mediatheque
-void lancerMenuPrincipal(Livre collection[], int * const nbLivres, int * const prochainId) {
+void lancerMenuPrincipal(Mediatheque *mediatheque) {
+    if (mediatheque == NULL) {
+        return;
+    }
+
     short choixMenu = -1;
     char saisie[100];
 
@@ -28,17 +32,17 @@ void lancerMenuPrincipal(Livre collection[], int * const nbLivres, int * const p
 
             case 1:
                 // Fonction à créer dans src/ajouter.c
-                ajouterLivre(collection, nbLivres, prochainId);
+                ajouterLivre(mediatheque);
                 break;
 
             case 2:
                 // Fonction définie dans src/afficher.c
-                afficher(collection, *nbLivres);
+                afficher(mediatheque);
                 break;
 
             case 3:
                 // Fonction à créer dans src/rechercher.c
-                rechercher(collection, *nbLivres);
+                rechercher(mediatheque);
                 break;
 
             case 0:

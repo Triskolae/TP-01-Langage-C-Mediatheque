@@ -19,29 +19,29 @@ static void afficherRecapitulatifAjout(const Livre * const livre) {
 
 //fonction principale AJOUT DE LIVRE :
 
-void ajouterLivre(Livre collection[], int * const nbLivres, int * const prochainId) {
+void ajouterLivre(Mediatheque *mediatheque) {
 // on met int * const nbLivre car je souhaites que le pointeur ne puisse pas être redirigé vers une autre adresse dans la fonction, mais que l'on puisse modifier l'entier pointé.
 
     // Verifier que les adresses recues sont valides:
-    if (collection == NULL || nbLivres == NULL || prochainId == NULL) {
+    if (mediatheque == NULL) {
         fprintf(stderr, "ERREUR : parametre invalide.\n");
         return;
     }
 
     // Verifier la coherence du nombre de livres
-    if (*nbLivres < 0 || *nbLivres > TAILLE_MAX) {
+    if (mediatheque->nbLivres < 0 || mediatheque->nbLivres > TAILLE_MAX) {
         fprintf(stderr, "ERREUR : nombre de livres invalide.\n");
         return;
     }
 
     // Verifier la coherence du prochain identifiant
-    if (*prochainId <= 0 || *prochainId == INT_MAX) {
+    if (mediatheque->prochainId <= 0 || mediatheque->prochainId == INT_MAX) {
         fprintf(stderr, "ERREUR : prochain identifiant invalide.\n");
         return;
     }
 
     // Refuser l'ajout si la collection est pleine
-    if (*nbLivres == TAILLE_MAX) {
+    if (mediatheque->nbLivres == TAILLE_MAX) {
         printf("ERREUR : mediatheque pleine (%d livres).\n", TAILLE_MAX);
         return;
     }
@@ -280,13 +280,13 @@ void ajouterLivre(Livre collection[], int * const nbLivres, int * const prochain
 
             // Attribuer un identifiant, rendre le livre disponible et l'ajouter a la collection
 
-            nouveauLivre.id = *prochainId;
+            nouveauLivre.id = mediatheque->prochainId;
             nouveauLivre.disponible = true;
 
-            collection[*nbLivres] = nouveauLivre;
+            mediatheque->collection[mediatheque->nbLivres] = nouveauLivre;
 
-            (*nbLivres)++;
-            (*prochainId)++;
+            mediatheque->nbLivres++;
+            mediatheque->prochainId++;
 
             printf("Livre ajoute avec succes (ID : %d).\n", nouveauLivre.id);
             return;

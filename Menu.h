@@ -3,6 +3,6 @@
 
 #include "Mediatheque.h"
 
-void lancerMenuPrincipal(Livre collection[], int * const nbLivres, int * const prochainId);
+void lancerMenuPrincipal(Mediatheque *mediatheque);
 
 #endif

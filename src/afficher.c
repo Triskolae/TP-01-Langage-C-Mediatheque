@@ -1,11 +1,11 @@
 #include "../Mediatheque.h"
 #include <stdio.h>
 
-void afficher(Livre collection[], int taille) {
+void afficher(const Mediatheque *mediatheque) {
     short choixMenu = -1;
     char saisie[100];
 
-    if (taille == 0) {
+    if (mediatheque->nbLivres == 0) {
         printf("La médiathèque est vide.\n");
         return;
     }
@@ -24,15 +24,15 @@ void afficher(Livre collection[], int taille) {
                 break;
             
             case 1:
-                afficherTous(collection, taille);
+                afficherTous(mediatheque);
                 break;
 
             case 2:
-                afficherParEtat(collection, taille, true);
+                afficherParEtat(mediatheque, true);
                 break;
 
             case 3:
-                afficherParEtat(collection, taille, false);
+                afficherParEtat(mediatheque, false);
                 break;
 
             case 0:
@@ -46,42 +46,42 @@ void afficher(Livre collection[], int taille) {
     } while (choixMenu != 0);
 }
 
-void afficherTous(Livre collection[], int taille) {
+void afficherTous(const Mediatheque *mediatheque) {
     printf("\nVoici la collection des médias :\n");
 
     int i = 0;
 
-    while (i < taille) {
-        if (collection[i].id > 0) {
-            printf("\nID : %d\n", collection[i].id);
-            printf("Titre : %s\n", collection[i].titre);
-            printf("Auteur : %s\n", collection[i].auteur);
-            printf("Description : %s\n", collection[i].description);
-            printf("Etat : %s\n",
-                   collection[i].disponible ? "disponible" : "emprunté");
+    while (i < mediatheque->nbLivres) {
+        const Livre *livre = &mediatheque->collection[i];
+
+        if (livre->id > 0) {
+            printf("\nID : %d\n", livre->id);
+            printf("Titre : %s\n", livre->titre);
+            printf("Auteur : %s\n", livre->auteur);
+            printf("Description : %s\n", livre->description);
+            printf("Etat : %s\n", livre->disponible ? "disponible" : "emprunté");
         }
 
         i++;
     }
 }
 
-void afficherParEtat(Livre collection[], int taille, bool disponible) {
-    printf("\nVoici la collection des médias %s :\n",
-           disponible ? "disponibles" : "empruntés");
+void afficherParEtat(const Mediatheque *mediatheque, bool disponible) {
+    printf("\nVoici la collection des médias %s :\n", disponible ? "disponibles" : "empruntés");
 
     int i = 0;
     int compteur = 0;
 
-    while (i < taille) {
-        if (collection[i].id > 0 &&
-            collection[i].disponible == disponible) {
+    while (i < mediatheque->nbLivres) {
+        const Livre *livre = &mediatheque->collection[i];
 
-            printf("\nID : %d\n", collection[i].id);
-            printf("Titre : %s\n", collection[i].titre);
-            printf("Auteur : %s\n", collection[i].auteur);
-            printf("Description : %s\n", collection[i].description);
-            printf("Etat : %s\n",
-                   collection[i].disponible ? "disponible" : "emprunté");
+        if (livre->id > 0 && livre->disponible == disponible) {
+
+            printf("\nID : %d\n", livre->id);
+            printf("Titre : %s\n", livre->titre);
+            printf("Auteur : %s\n", livre->auteur);
+            printf("Description : %s\n", livre->description);
+            printf("Etat : %s\n", livre->disponible ? "disponible" : "emprunté");
 
             compteur++;
         }
