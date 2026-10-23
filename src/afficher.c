@@ -1,6 +1,17 @@
+/**
+ * @file afficher.c
+ * @brief Affichage de la collection et filtrage selon la disponibilite.
+ * @author Sarah et Tristan (projet en binome)
+ * @date 2026-10-23 (mise a jour de la documentation)
+ * @details Affichage de la collection et filtrage selon la disponibilite.
+ */
+
 #include "../Mediatheque.h"
 #include <stdio.h>
-
+/**
+ * @brief Pilote l affichage de la collection selon le filtre choisi.
+ * @param mediatheque Pointeur vers la mediatheque concernee.
+ */
 void afficher(const Mediatheque *mediatheque) {
     short choixMenu = -1;
     char saisie[100];
@@ -11,7 +22,7 @@ void afficher(const Mediatheque *mediatheque) {
     }
 
     do {
-        // Sous-menu défini dans src/menu.c
+        /** Sous-menu défini dans src/menu.c */
         afficherMenuAffichage();
 
         choixMenu = lireChoixMenu(saisie, sizeof(saisie), 4);
@@ -45,7 +56,10 @@ void afficher(const Mediatheque *mediatheque) {
 
     } while (choixMenu != 0);
 }
-
+/**
+ * @brief Affiche les informations de tous les livres.
+ * @param mediatheque Pointeur vers la mediatheque concernee.
+ */
 void afficherTous(const Mediatheque *mediatheque) {
     printf("\nVoici la collection des médias :\n");
 
@@ -65,7 +79,11 @@ void afficherTous(const Mediatheque *mediatheque) {
         i++;
     }
 }
-
+/**
+ * @brief Affiche les livres correspondant a un etat de disponibilite.
+ * @param mediatheque Pointeur vers la mediatheque concernee.
+ * @param disponible Etat de disponibilite utilise pour le filtrage.
+ */
 void afficherParEtat(const Mediatheque *mediatheque, bool disponible) {
     printf("\nVoici la collection des médias %s :\n", disponible ? "disponibles" : "empruntés");
 

@@ -1,8 +1,21 @@
+/**
+ * @file menu.c
+ * @brief Navigation dans le menu principal et affichage des sous-menus.
+ * @author Sarah et Tristan (projet en binome)
+ * @date 2026-10-23 (mise a jour de la documentation)
+ * @details Navigation dans le menu principal et affichage des sous-menus.
+ */
+
 #include "../Menu.h"
 #include <stdio.h>
 
 
-// Gestion du menu principal de la mediatheque
+/** Gestion du menu principal de la mediatheque */
+/**
+ * @brief Affiche le menu principal et oriente les actions utilisateur.
+ * @param mediatheque Pointeur vers la mediatheque concernee.
+ * @note Transmet la mediatheque aux fonctions pouvant la modifier.
+ */
 void lancerMenuPrincipal(Mediatheque *mediatheque) {
     if (mediatheque == NULL) {
         return;
@@ -12,7 +25,7 @@ void lancerMenuPrincipal(Mediatheque *mediatheque) {
     char saisie[100];
 
     do {
-        // MENU PRINCIPAL
+        /** MENU PRINCIPAL */
         printf("\n========== MA PETITE MEDIATHEQUE ==========\n");
         printf("1 : Ajouter un livre\n");
         printf("2 : Afficher les livres\n");
@@ -31,17 +44,17 @@ void lancerMenuPrincipal(Mediatheque *mediatheque) {
                 break;
 
             case 1:
-                // Fonction à créer dans src/ajouter.c
+                /** Fonction à créer dans src/ajouter.c */
                 ajouterLivre(mediatheque);
                 break;
 
             case 2:
-                // Fonction définie dans src/afficher.c
+                /** Fonction définie dans src/afficher.c */
                 afficher(mediatheque);
                 break;
 
             case 3:
-                // Fonction à créer dans src/rechercher.c
+                /** Fonction à créer dans src/rechercher.c */
                 rechercher(mediatheque);
                 break;
 
@@ -54,7 +67,10 @@ void lancerMenuPrincipal(Mediatheque *mediatheque) {
 }
 
 
-// Sous-menu d'affichage des livres
+/** Sous-menu d'affichage des livres */
+/**
+ * @brief Affiche les choix du sous-menu d affichage.
+ */
 void afficherMenuAffichage(void) {
     printf("\n========== AFFICHAGE ==========\n");
     printf("Quels livres souhaitez-vous afficher ?\n");
@@ -65,7 +81,10 @@ void afficherMenuAffichage(void) {
     printf("Saisissez votre choix : ");
 }
 
-// Sous-menu de recherche
+/** Sous-menu de recherche */
+/**
+ * @brief Affiche les choix du sous-menu de recherche.
+ */
 void afficherMenuRecherche(void) {
     printf("\n========== RECHERCHE ==========\n");
     printf("1 : Par identifiant\n");
@@ -75,7 +94,10 @@ void afficherMenuRecherche(void) {
     printf("Saisissez votre choix : ");
 }
 
-// Sous-menu de confirmation d'ajout
+/** Sous-menu de confirmation d'ajout */
+/**
+ * @brief Affiche les choix de confirmation d un ajout.
+ */
 void afficherMenuConfirmation(void) {
     printf("\nQue souhaitez-vous faire ?\n");
     printf("1 : Confirmer\n");
@@ -84,7 +106,10 @@ void afficherMenuConfirmation(void) {
     printf("Saisissez votre choix : ");
 }
 
-// Sous-menu de correction d'un livre
+/** Sous-menu de correction d'un livre */
+/**
+ * @brief Affiche les champs pouvant etre corriges.
+ */
 void afficherMenuCorrection(void) {
     printf("\n========== CORRECTION ==========\n");
     printf("Quel champ souhaitez-vous corriger ?\n");

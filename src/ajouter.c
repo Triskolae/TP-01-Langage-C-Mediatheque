@@ -1,9 +1,22 @@
+/**
+ * @file ajouter.c
+ * @brief Saisie, correction, confirmation et enregistrement des livres.
+ * @author Sarah et Tristan (projet en binome)
+ * @date 2026-10-23 (mise a jour de la documentation)
+ * @details Saisie, correction, confirmation et enregistrement des livres.
+ */
+
 #include "../Mediatheque.h"
 #include <stdio.h>
 #include <string.h>
 #include <limits.h>
 
-// Procédure de réaffichage du récapitulatif de saisie utilisateur, propre a l'operation d'ajout d'un livre
+/** Procédure de réaffichage du récapitulatif de saisie utilisateur, propre a l'operation d'ajout d'un livre */
+/**
+ * @brief Affiche les informations du livre avant validation.
+ * @param livre Pointeur vers le livre a presenter.
+ * @note Ne modifie pas le livre transmis.
+ */
 static void afficherRecapitulatifAjout(const Livre * const livre) {
     if (livre == NULL) {
         return;
@@ -17,40 +30,45 @@ static void afficherRecapitulatifAjout(const Livre * const livre) {
 }
 
 
-//fonction principale AJOUT DE LIVRE :
-
+/** fonction principale AJOUT DE LIVRE : */
+/**
+ * @brief Saisit un livre et l ajoute apres confirmation.
+ * @param mediatheque Pointeur vers la mediatheque concernee.
+ * @note Modifie la collection, nbLivres et prochainId de l appelant uniquement si l ajout est confirme.
+ */
 void ajouterLivre(Mediatheque *mediatheque) {
-// on met int * const nbLivre car je souhaites que le pointeur ne puisse pas être redirigé vers une autre adresse dans la fonction, mais que l'on puisse modifier l'entier pointé.
+/** Le parametre mediatheque est un pointeur vers la structure de l appelant.
+ *  La fonction peut donc modifier ses champs sans retourner de nouvelle structure. */
 
-    // Verifier que les adresses recues sont valides:
+    /** Verifier que les adresses recues sont valides: */
     if (mediatheque == NULL) {
         fprintf(stderr, "ERREUR : parametre invalide.\n");
         return;
     }
 
-    // Verifier la coherence du nombre de livres
+    /** Verifier la coherence du nombre de livres */
     if (mediatheque->nbLivres < 0 || mediatheque->nbLivres > TAILLE_MAX) {
         fprintf(stderr, "ERREUR : nombre de livres invalide.\n");
         return;
     }
 
-    // Verifier la coherence du prochain identifiant
+    /** Verifier la coherence du prochain identifiant */
     if (mediatheque->prochainId <= 0 || mediatheque->prochainId == INT_MAX) {
         fprintf(stderr, "ERREUR : prochain identifiant invalide.\n");
         return;
     }
 
-    // Refuser l'ajout si la collection est pleine
+    /** Refuser l'ajout si la collection est pleine */
     if (mediatheque->nbLivres == TAILLE_MAX) {
         printf("ERREUR : mediatheque pleine (%d livres).\n", TAILLE_MAX);
         return;
     }
 
     Livre nouveauLivre = {0};
-    // crée une structure locale qui contient les informations du livre en cours de saisie
+    /** crée une structure locale qui contient les informations du livre en cours de saisie */
 
 
-    // Saisir TITRE
+    /** Saisir TITRE */
     do {
         printf("Saisissez le titre du livre : ");
 
@@ -59,7 +77,7 @@ void ajouterLivre(Mediatheque *mediatheque) {
             break;
         }
 
-        // Arreter l'ajout si l'entree standard est fermée ou si une erreur de lecture survient.
+        /** Arreter l'ajout si l'entree standard est fermée ou si une erreur de lecture survient. */
         if (feof(stdin) || ferror(stdin)) {
             printf("Lecture interrompue : ajout annulé.\n");
             return;
@@ -68,7 +86,7 @@ void ajouterLivre(Mediatheque *mediatheque) {
     } while (1);
 
 
-    // Saisir AUTEUR
+    /** Saisir AUTEUR */
     do {
         printf("Saisissez l'auteur du livre : ");
 
@@ -85,7 +103,7 @@ void ajouterLivre(Mediatheque *mediatheque) {
     } while (1);
     
     
-    // Saisir ANNEE
+    /** Saisir ANNEE */
     do {
         char saisieAnnee[20];
 
@@ -105,7 +123,7 @@ void ajouterLivre(Mediatheque *mediatheque) {
 
     } while (1);
 
-    // Saisir DESCRIPTION
+    /** Saisir DESCRIPTION */
     do {
         printf("Saisissez la description du livre : ");
 
@@ -122,16 +140,18 @@ void ajouterLivre(Mediatheque *mediatheque) {
     } while (1);
 
 
-    // Boucle de confirmation de l'ajout :
+    /** Boucle de confirmation de l'ajout : */
     short choix;
 
+    /** Repeter le recapitulatif tant que l utilisateur corrige
+     *  les champs ; seule la confirmation declenche l ajout. */
     do {
         afficherRecapitulatifAjout(&nouveauLivre);
 
-        // Afficher le menu de confirmation existant de Tristan (Confirmer / Corriger / Anuler)
+        /** Afficher le menu de confirmation existant de Tristan (Confirmer / Corriger / Anuler) */
         afficherMenuConfirmation();
 
-        // Lire le choix de l'utilisateur
+        /** Lire le choix de l'utilisateur */
         char saisie[20];
         choix = lireChoixMenu(saisie, sizeof saisie, 4);
 
@@ -141,7 +161,7 @@ void ajouterLivre(Mediatheque *mediatheque) {
         }
 
         if (choix == -2) {
-            // Saisie invalide : reafficher le menu.
+            /** Saisie invalide : reafficher le menu. */
             continue;
         }
 
@@ -150,19 +170,19 @@ void ajouterLivre(Mediatheque *mediatheque) {
             continue;
         }
 
-        // CHOIX UTILISATEUR valide: ANNULATION
+        /** CHOIX UTILISATEUR valide: ANNULATION */
         if (choix == 3) {
             printf("Ajout du livre annulé.\n");
             printf("Retour au menu principal.\n");
             return;
         }
 
-        // CHOIX UTILISATEUR valide: CORRECTION
+        /** CHOIX UTILISATEUR valide: CORRECTION */
         if (choix == 2) {
             char saisieCorrection[20];
             short choixCorrection;
 
-            // Boucle de correction
+            /** Boucle de correction */
             do {
                 afficherMenuCorrection();
 
@@ -185,10 +205,10 @@ void ajouterLivre(Mediatheque *mediatheque) {
                     break;
                 }
                 
-                // Correction de l'ANNEE DE PUBLICATION
+                /** Correction de l'ANNEE DE PUBLICATION */
                 if (choixCorrection == 4) {
 
-                    // L'annee est un short : sa correction est traitee separement des champs texte dans le switch suivant
+                    /** L'annee est un short : sa correction est traitee separement des champs texte dans le switch suivant */
                     do {
                         char saisieAnnee[20];
 
@@ -209,11 +229,11 @@ void ajouterLivre(Mediatheque *mediatheque) {
 
                     } while (1);
 
-                    // Revenir au menu de correction
+                    /** Revenir au menu de correction */
                     continue;
                 }
 
-                // Correction des champs textuels : titre, auteur et description
+                /** Correction des champs textuels : titre, auteur et description */
                 char *champ = NULL;
                 size_t tailleChamp = 0;
                 const char *nomChamp = NULL;
@@ -221,12 +241,12 @@ void ajouterLivre(Mediatheque *mediatheque) {
                 switch (choixCorrection) {
                     case 1:
                         champ = nouveauLivre.titre;
-                        tailleChamp = sizeof nouveauLivre.titre; //Ici on préfère utiliser sizeof car :
-                        //champ est l'dresse du tableau de caractères à modifier
-                        //tailleChamp est la capacité totale de ce tableau en octets
-                        //nomChamp est le texte utilisé dans le printf
-                        //Et titre est un tableau directement déclaré dans la structure Livre, sizeof retourne sa capacité totale.
-                        // La fonction lireChaine() ne serait donc pas pertinente car elle  ne sert pas à déterminer la capacité d'un tableau. Elle sert à lire une chaîne de caractères en respectant une capacité qu'on lui fournit.
+                        tailleChamp = sizeof nouveauLivre.titre; /** Ici on préfère utiliser sizeof car : */
+                        /** champ est l'dresse du tableau de caractères à modifier */
+                        /** tailleChamp est la capacité totale de ce tableau en octets */
+                        /** nomChamp est le texte utilisé dans le printf */
+                        /** Et titre est un tableau directement déclaré dans la structure Livre, sizeof retourne sa capacité totale. */
+                        /** La fonction lireChaine() ne serait donc pas pertinente car elle  ne sert pas à déterminer la capacité d'un tableau. Elle sert à lire une chaîne de caractères en respectant une capacité qu'on lui fournit. */
                         nomChamp = "titre";
                         break;
 
@@ -246,7 +266,7 @@ void ajouterLivre(Mediatheque *mediatheque) {
                         continue;
                 }
 
-                // Lire la correction dans un tableau temporaire :
+                /** Lire la correction dans un tableau temporaire : */
                 char correction[sizeof nouveauLivre.description];
 
                 char *resultat;
@@ -263,26 +283,29 @@ void ajouterLivre(Mediatheque *mediatheque) {
 
                 } while (resultat == NULL);
 
-                // Appliquer la correction uniquement apres validation
+                /** Appliquer la correction uniquement apres validation */
                 strcpy(champ, correction);
 
                 printf("Champ corrigé avec succes.\n");
 
             } while (choixCorrection != 0);
 
-            // Revenir au recap
+            /** Revenir au recap */
             continue;
         }
 
         
-        // CHOIX UTILISATEUR valide: CONFIRMATION
+        /** CHOIX UTILISATEUR valide: CONFIRMATION */
         if (choix == 1) {
 
-            // Attribuer un identifiant, rendre le livre disponible et l'ajouter a la collection
+            /** Attribuer un identifiant, rendre le livre disponible et l'ajouter a la collection */
 
             nouveauLivre.id = mediatheque->prochainId;
             nouveauLivre.disponible = true;
 
+            /** Le pointeur mediatheque designe la structure de l appelant :
+             *  les trois affectations suivantes persistent apres le retour.
+             *  L enregistrement n intervient qu apres confirmation explicite. */
             mediatheque->collection[mediatheque->nbLivres] = nouveauLivre;
 
             mediatheque->nbLivres++;

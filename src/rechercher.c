@@ -1,7 +1,18 @@
+/**
+ * @file rechercher.c
+ * @brief Recherche de livres par identifiant, titre ou auteur.
+ * @author Sarah et Tristan (projet en binome)
+ * @date 2026-10-23 (mise a jour de la documentation)
+ * @details Recherche de livres par identifiant, titre ou auteur.
+ */
+
 #include "../Mediatheque.h"
 #include <stdio.h>
 #include <string.h>
-
+/**
+ * @brief Pilote la recherche en fonction du critere choisi.
+ * @param mediatheque Pointeur vers la mediatheque concernee.
+ */
 void rechercher(const Mediatheque *mediatheque) {
     short choixMenu = -1;
     char saisie[100];
@@ -44,7 +55,10 @@ void rechercher(const Mediatheque *mediatheque) {
         }
     } while (choixMenu != 0);
 }
-
+/**
+ * @brief Recherche et affiche un livre par son identifiant.
+ * @param mediatheque Pointeur vers la mediatheque concernee.
+ */
 void rechercherParId(const Mediatheque *mediatheque) {
     printf("Veuillez entrer l'id du média recherché: ");
     int idRecherche = 0;
@@ -74,7 +88,13 @@ void rechercherParId(const Mediatheque *mediatheque) {
     }
 }
 
-// recherche par auteur ou titre selon la valeur de l'enum passé dans "champ"
+/**
+ * @brief Recherche et affiche les livres correspondant au texte saisi.
+ * @param mediatheque Pointeur vers la mediatheque concernee.
+ * @param champ Champ textuel utilise pour la recherche.
+ */
+/** La recherche textuelle peut correspondre a plusieurs livres :
+ *  le parcours ne s arrete pas a la premiere correspondance. */
 void rechercherParChampTexte(const Mediatheque *mediatheque, ChampTexte champ) {
     bool livreTrouve = false;
     const char *nomChamp = (champ == CHAMP_AUTEUR) ? "l'auteur" : "le titre";
