@@ -122,6 +122,13 @@ Les tests sont réalisés progressivement lors du développement et de l'intégr
 
 L'objectif est de vérifier non seulement le fonctionnement nominal de l'application, mais également son comportement face aux saisies incorrectes et aux situations particulières.
 
+### Tests programmatiques
+A la racine du projet
+Autoriser les droits en exécution des tests:
+`chmod +x tests/lancer_tests.sh`
+Exécuter les scripts de tests:
+`./tests/lancer_tests.sh`
+
 ## Répartition du travail
 
 Le projet **Ma Petite Médiathèque** est développé en binôme par **Sarah et Tristan**.
