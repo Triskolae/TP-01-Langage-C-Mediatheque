@@ -66,34 +66,49 @@ int lireInt(char *saisie, size_t taille) {
     return (int)valeur;
 }
 
+
 char *lireChaine(char *saisie, size_t taille) {
     if (saisie == NULL || taille < 2) {
         return NULL;
     }
 
+    // Lire au maximum taille - 1 caracteres.
     if (fgets(saisie, taille, stdin) == NULL) {
-        return NULL; // EOF ou erreur de lecture
-    }
-
-    // Recherche et suppression du '\n'
-    char *p = strchr(saisie, '\n');
-
-    if (p != NULL) {
-        *p = '\0';
-    } else {
-        // La saisie a dépassé le buffer : on vide le tampon stdin
-        int c;
-        while ((c = getchar()) != '\n' && c != EOF);
-    }
-
-    // Gestion du cas où l'utilisateur tape juste Entrée
-    if (saisie[0] == '\0') {
-        printf("\nERREUR : la saisie ne peut pas être vide.\n");
         return NULL;
     }
 
-    return saisie; // Retourne le pointeur vers la chaîne valide
+    // Rechercher le retour a la ligne.
+    char * const finLigne = strchr(saisie, '\n');
+
+    if (finLigne != NULL) {
+        *finLigne = '\0';
+    } 
+    
+    else {
+        // Verifier si des caracteres supplementaires restent.
+        int caractere = getchar();
+
+        if (caractere != '\n' && caractere != EOF) {
+            // La saisie depasse la capacite autorisee.
+            while (caractere != '\n' && caractere != EOF) {
+                caractere = getchar();
+            }
+
+            saisie[0] = '\0';
+            printf("\nERREUR : saisie trop longue.\n");
+            return NULL;
+        }
+    }
+
+    // Refuser une chaine vide.
+    if (saisie[0] == '\0') {
+        printf("\nERREUR : la saisie ne peut pas etre vide.\n");
+        return NULL;
+    }
+
+    return saisie;
 }
+
 
 char *comparerChaines(char *chaine, char *sousChaine) {
     if (!*sousChaine) return chaine;

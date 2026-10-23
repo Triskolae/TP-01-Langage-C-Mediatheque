@@ -25,6 +25,12 @@ void afficher(Livre collection[], int taille) {
         }
 
         switch (choixMenu) {
+            /*case -1:
+                return;
+                
+            case -2:
+                break; +1.5 points*/
+            
             case 1:
                 afficherTous(collection, taille);
                 break;
