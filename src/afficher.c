@@ -1,8 +1,7 @@
-
 #include "../Main.h"
 #include <stdio.h>
 
-void afficherCollection(Livre collection[], int taille) {
+void afficher(Livre collection[], int taille) {
     short choixMenu = -1;
     char saisie[100];
 
@@ -15,7 +14,7 @@ void afficherCollection(Livre collection[], int taille) {
         // Sous-menu défini dans src/menu.c
         afficherMenuAffichage();
 
-        choixMenu = lire(saisie, sizeof(saisie), 4);
+        choixMenu = lireChoixMenu(saisie, sizeof(saisie), 4);
 
         if (choixMenu == -1) {
             break;

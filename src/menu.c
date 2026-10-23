@@ -1,7 +1,6 @@
 #include "../Main.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 
 // Sous-menu d'affichage des livres
@@ -19,8 +18,8 @@ void afficherMenuAffichage(void) {
 void afficherMenuRecherche(void) {
     printf("\n========== RECHERCHE ==========\n");
     printf("1 : Par identifiant\n");
-    printf("2 : Par titre (egalite exacte)\n");
-    printf("3 : Par auteur (egalite exacte)\n");
+    printf("2 : Par titre\n");
+    printf("3 : Par auteur\n");
     printf("0 : Retour au menu principal\n");
     printf("Saisissez votre choix : ");
 }
