@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <limits.h>
+#include <stdbool.h>
 
 void rechercher(Livre collection[], int taille) {
     short choixMenu = -1;
@@ -77,6 +78,7 @@ void rechercherParId(Livre collection[], int taille) {
 }
 
 void rechercherParChampTexte(Livre collection[], int taille, ChampTexte champ) {
+    bool livreTrouve = false;
     const char *nomChamp = (champ == CHAMP_AUTEUR) ? "l'auteur" : "le titre";
     printf("Veuillez entrer %s du média recherché : ", nomChamp);
 
@@ -87,8 +89,8 @@ void rechercherParChampTexte(Livre collection[], int taille, ChampTexte champ) {
         return;
     }
     
-    if (strlen(saisie) < 3) {
-        printf("Erreur : la recherche doit contenir au moins 3 caractères.\n");
+    if (strlen(saisie) > 100) {
+        printf("Erreur : la recherche peut contenir au maximum 100 caractères.\n");
         return;
     }
     int i = 0;
@@ -105,6 +107,7 @@ void rechercherParChampTexte(Livre collection[], int taille, ChampTexte champ) {
         }
 
         if (chaineAComparer != NULL && comparerChaines(chaineAComparer, saisie) != NULL) {
+            livreTrouve = true;
             printf("\nID : %d\n", collection[i].id);
             printf("Titre : %s\n", collection[i].titre);
             printf("Auteur : %s\n", collection[i].auteur);
@@ -114,5 +117,9 @@ void rechercherParChampTexte(Livre collection[], int taille, ChampTexte champ) {
         }
 
         i++;
+    }
+
+    if (!livreTrouve) {
+        printf("\nAucun livre correspondant.\n");
     }
 }

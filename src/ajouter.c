@@ -186,7 +186,7 @@ void ajouterLivre(Livre collection[], int * const nbLivres, int * const prochain
                     break;
                 }
                 
-                // correction de l'ANNEE DE UBLICATION
+                // Correction de l'ANNEE DE PUBLICATION
                 if (choixCorrection == 4) {
 
                     // L'annee est un short : sa correction est traitee separement des champs texte dans le switch suivant
@@ -281,7 +281,7 @@ void ajouterLivre(Livre collection[], int * const nbLivres, int * const prochain
         
         // CHOIX UTILISATEUR valide: CONFIRMATION
         if (choix == 1) {
-            
+
             // Attribuer un identifiant, rendre le livre disponible et l'ajouter a la collection
 
             nouveauLivre.id = *prochainId;
