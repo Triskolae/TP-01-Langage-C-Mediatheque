@@ -1,4 +1,4 @@
-#include "../Main.h"
+#include "../Livre.h"
 #include <stdio.h>
 
 void afficher(Livre collection[], int taille) {

@@ -1,6 +1,5 @@
-
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef LIVRE_H
+#define LIVRE_H
 
 #include <stdbool.h>
 #include <stddef.h>
