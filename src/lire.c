@@ -93,6 +93,53 @@ int lireInt(char *saisie, size_t taille) {
     return (int)valeur;
 }
 
+//Spécifique aux année de pulications car elles peuvent être négatives
+short lireAnnee(char *saisie, size_t taille) {
+
+    // Verifier que le tableau de saisie est valide
+    if (saisie == NULL || taille < 2) {
+        return 0;
+    }
+
+    if (fgets(saisie, taille, stdin) == NULL) {
+        return 0; // EOF ou erreur de lecture
+    }
+
+    // Refuser une saisie trop longue et vider le reste de la ligne
+    if (strchr(saisie, '\n') == NULL && !feof(stdin)) {
+        int caractere = getchar();
+
+        if (caractere != '\n' && caractere != EOF) {
+            do {
+                caractere = getchar();
+            } while (caractere != '\n' && caractere != EOF);
+
+            printf("\nERREUR : saisie trop longue.\n");
+            return 0;
+        }
+    }
+
+    char *fin;
+    errno = 0;
+
+    // strtol permet de conserver le signe de la valeur saisie
+    long valeur = strtol(saisie, &fin, 10);
+
+    // Ignorer les espaces apres le nombre
+    while (*fin == ' ' || *fin == '\t' ||
+           *fin == '\n' || *fin == '\r') {
+        fin++;
+    }
+
+    // Refuser une saisie non numerique, negative, nulle ou hors limites
+    if (fin == saisie || *fin != '\0' || errno == ERANGE || valeur == 0 || valeur < -1800 || valeur > SHRT_MAX) {
+
+        printf("\nERREUR : année de publication invalide.\n");
+        return 0;
+    }
+
+    return (short)valeur;
+}
 
 char *lireChaine(char *saisie, size_t taille) {
     if (saisie == NULL || taille < 2) {

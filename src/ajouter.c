@@ -84,16 +84,17 @@ void ajouterLivre(Livre collection[], int * const nbLivres, int * const prochain
 
     } while (1);
     
+    
     // Saisir ANNEE
     do {
         char saisieAnnee[20];
 
         printf("Saisissez l'année de publication : ");
 
-        int anneeSaisie = lireInt(saisieAnnee, sizeof saisieAnnee);
+        short anneeSaisie = lireAnnee(saisieAnnee, sizeof saisieAnnee);
 
-        if (anneeSaisie >= 1 && anneeSaisie <= SHRT_MAX) {
-            nouveauLivre.annee = (short)anneeSaisie;
+        if (anneeSaisie != 0) {
+            nouveauLivre.annee = anneeSaisie;
             break;
         }
 
@@ -101,8 +102,6 @@ void ajouterLivre(Livre collection[], int * const nbLivres, int * const prochain
             printf("Lecture interrompue : ajout annulé.\n");
             return;
         }
-
-        printf("ERREUR : année invalide.\n");
 
     } while (1);
 
@@ -194,11 +193,11 @@ void ajouterLivre(Livre collection[], int * const nbLivres, int * const prochain
                         char saisieAnnee[20];
 
                         printf("Saisissez la nouvelle année de publication : ");
-                        int anneeSaisie = lireInt(saisieAnnee, sizeof saisieAnnee);
 
-                        // Verifier que la valeur peut etre stockee dans un short
-                        if (anneeSaisie >= 1 && anneeSaisie <= SHRT_MAX) {
-                            nouveauLivre.annee = (short)anneeSaisie;
+                        short anneeSaisie = lireAnnee(saisieAnnee, sizeof saisieAnnee);
+
+                        if (anneeSaisie != 0) {
+                            nouveauLivre.annee = anneeSaisie;
                             printf("Année corrigée avec succès.\n");
                             break;
                         }
@@ -208,14 +207,11 @@ void ajouterLivre(Livre collection[], int * const nbLivres, int * const prochain
                             return;
                         }
 
-                        printf("ERREUR : année invalide.\n");
-
                     } while (1);
 
                     // Revenir au menu de correction
                     continue;
                 }
-
 
                 // Correction des champs textuels : titre, auteur et description
                 char *champ = NULL;

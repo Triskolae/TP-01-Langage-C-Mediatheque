@@ -43,6 +43,7 @@ void rechercherParChampTexte(Livre collection[], int taille, ChampTexte champ);
 // Lecture des saisies (src/lire.c)
 short lireChoixMenu(char *saisie, size_t taille, short nbChoix);
 int lireInt(char *saisie, size_t taille);
+short lireAnnee(char *saisie, size_t taille);
 char *lireChaine(char *saisie, size_t taille);
 char *comparerChaines(char *chaine, char *sousChaine);
 
