@@ -189,7 +189,7 @@ Tristan s'est principalement chargé du **développement des fonctionnalités d'
 
 L'organisation du projet, l'intégration des fonctionnalités et les ajustements du code ont également fait l'objet d'un travail commun.
 
-Le développement est suivi sur **GitHub**, avec des branches individuelles permettant à chacun de développer ses fonctionnalités avant de les intégrer au projet.
+Le développement est suivi sur **GitHub** (https://github.com/Triskolae/TP-01-Langage-C-Mediatheque), avec des branches individuelles permettant à chacun de développer ses fonctionnalités avant de les intégrer au projet.
 
 ## Prochaines évolutions
 
