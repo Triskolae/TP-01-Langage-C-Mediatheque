@@ -15,16 +15,14 @@ void rechercher(Livre collection[], int taille) {
         afficherMenuRecherche();
 
         choixMenu = lireChoixMenu(saisie, sizeof(saisie), 4);
-        
-        if (choixMenu == -1) {
-            break;
-        }
-
-        if (choixMenu == -2) {
-            continue;
-        }
 
         switch (choixMenu) {
+            case -1:
+                return;
+
+            case -2:
+                break;
+
             case 1:
                 rechercherParId(collection, taille);
                 break;

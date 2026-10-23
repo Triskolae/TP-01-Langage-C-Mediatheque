@@ -1,4 +1,4 @@
-#include "../Livre.h"
+#include "../Mediatheque.h"
 #include <stdio.h>
 
 void afficher(Livre collection[], int taille) {
@@ -16,20 +16,12 @@ void afficher(Livre collection[], int taille) {
 
         choixMenu = lireChoixMenu(saisie, sizeof(saisie), 4);
 
-        if (choixMenu == -1) {
-            break;
-        }
-
-        if (choixMenu == -2) {
-            continue;
-        }
-
         switch (choixMenu) {
-            /*case -1:
+            case -1:
                 return;
                 
             case -2:
-                break; +1.5 points*/
+                break;
             
             case 1:
                 afficherTous(collection, taille);

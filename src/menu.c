@@ -18,16 +18,14 @@ void lancerMenuPrincipal(Livre collection[], int * const nbLivres, int * const p
 
         choixMenu = lireChoixMenu(saisie, sizeof saisie, 4);
 
-        if (choixMenu == -1) {
-            printf("\nFin de la saisie.\n");
-            break;
-        }
-
-        if (choixMenu == -2) {
-            continue;
-        }
-
         switch (choixMenu) {
+            case -1:
+                printf("\nFin de la saisie.\n");
+                return;
+
+            case -2:
+                break;
+
             case 1:
                 // Fonction à créer dans src/ajouter.c
                 ajouterLivre(collection, nbLivres, prochainId);
