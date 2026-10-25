@@ -28,7 +28,13 @@ void ajouterLivre(Mediatheque *mediatheque);
 
 int chercherIndiceParId(Mediatheque *mediatheque, int idRecherche);
 
-void afficherMenuSuppression(Mediatheque *mediatheque);
+void supprimer(Mediatheque *mediatheque);
+
+void supprimerMedia(Mediatheque *mediatheque, int indice);
+
+void trier(Mediatheque *mediatheque);
+
+void triBulles(Mediatheque *mediatheque);
 
 /** Sous-menus (src/menu.c) */
 /**

@@ -31,10 +31,11 @@ void lancerMenuPrincipal(Mediatheque *mediatheque) {
         printf("2 : Afficher les livres\n");
         printf("3 : Rechercher un livre\n");
         printf("4 : Supprimer un livre\n");
+        printf("5 : Trier la mediathèque\n");
         printf("0 : Quitter\n");
         printf("Saisissez votre choix : ");
 
-        choixMenu = lireChoixMenu(saisie, sizeof saisie, 5);
+        choixMenu = lireChoixMenu(saisie, sizeof saisie, 6);
 
         switch (choixMenu) {
             case -1:
@@ -60,7 +61,11 @@ void lancerMenuPrincipal(Mediatheque *mediatheque) {
                 break;
 
             case 4:
-                afficherMenuSuppression(mediatheque);
+                supprimer(mediatheque);
+                break;
+                
+            case 5:
+                trier(mediatheque);
                 break;
 
             case 0:
