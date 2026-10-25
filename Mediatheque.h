@@ -26,6 +26,10 @@ typedef struct {
  */
 void ajouterLivre(Mediatheque *mediatheque);
 
+int chercherIndiceParId(Mediatheque *mediatheque, int idRecherche);
+
+void afficherMenuSuppression(Mediatheque *mediatheque);
+
 /** Sous-menus (src/menu.c) */
 /**
  * @brief Affiche les choix du sous-menu d affichage.
@@ -54,6 +58,9 @@ void afficher(const Mediatheque *mediatheque);
  * @brief Affiche les informations de tous les livres.
  * @param mediatheque Pointeur vers la mediatheque concernee.
  */
+
+void afficherLivre(const Livre *livre);
+
 void afficherTous(const Mediatheque *mediatheque);
 /**
  * @brief Affiche les livres correspondant a un etat de disponibilite.

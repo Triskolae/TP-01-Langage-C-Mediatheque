@@ -56,6 +56,16 @@ void afficher(const Mediatheque *mediatheque) {
 
     } while (choixMenu != 0);
 }
+
+void afficherLivre(const Livre *livre) {
+    printf("\nID : %d\n", livre->id);
+    printf("Titre : %s\n", livre->titre);
+    printf("Auteur : %s\n", livre->auteur);
+    printf("Description : %s\n", livre->description);
+    printf("Année : %d\n", livre->annee);
+    printf("Etat : %s\n", livre->disponible ? "disponible" : "emprunté");
+}
+
 /**
  * @brief Affiche les informations de tous les livres.
  * @param mediatheque Pointeur vers la mediatheque concernee.
@@ -69,11 +79,7 @@ void afficherTous(const Mediatheque *mediatheque) {
         const Livre *livre = &mediatheque->collection[i];
 
         if (livre->id > 0) {
-            printf("\nID : %d\n", livre->id);
-            printf("Titre : %s\n", livre->titre);
-            printf("Auteur : %s\n", livre->auteur);
-            printf("Description : %s\n", livre->description);
-            printf("Etat : %s\n", livre->disponible ? "disponible" : "emprunté");
+            afficherLivre(livre);
         }
 
         i++;
@@ -94,13 +100,7 @@ void afficherParEtat(const Mediatheque *mediatheque, bool disponible) {
         const Livre *livre = &mediatheque->collection[i];
 
         if (livre->id > 0 && livre->disponible == disponible) {
-
-            printf("\nID : %d\n", livre->id);
-            printf("Titre : %s\n", livre->titre);
-            printf("Auteur : %s\n", livre->auteur);
-            printf("Description : %s\n", livre->description);
-            printf("Etat : %s\n", livre->disponible ? "disponible" : "emprunté");
-
+            afficherLivre(livre);
             compteur++;
         }
 

@@ -73,11 +73,7 @@ void rechercherParId(const Mediatheque *mediatheque) {
         const Livre *livre = &mediatheque->collection[i];
 
         if (livre->id == idRecherche) {
-            printf("\nID : %d\n", livre->id);
-            printf("Titre : %s\n", livre->titre);
-            printf("Auteur : %s\n", livre->auteur);
-            printf("Description : %s\n", livre->description);
-            printf("Etat : %s\n", livre->disponible ? "disponible" : "emprunté");
+            afficherLivre(livre);
             found = true;
             break;
         }
@@ -128,11 +124,7 @@ void rechercherParChampTexte(const Mediatheque *mediatheque, ChampTexte champ) {
 
         if (chaineAComparer != NULL && comparerChaines(chaineAComparer, saisie) != NULL) {
             livreTrouve = true;
-            printf("\nID : %d\n", livre->id);
-            printf("Titre : %s\n", livre->titre);
-            printf("Auteur : %s\n", livre->auteur);
-            printf("Description : %s\n", livre->description);
-            printf("Etat : %s\n", livre->disponible ? "disponible" : "emprunté");
+            afficherLivre(livre);
         }
 
         i++;

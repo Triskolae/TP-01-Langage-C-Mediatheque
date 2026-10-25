@@ -30,10 +30,11 @@ void lancerMenuPrincipal(Mediatheque *mediatheque) {
         printf("1 : Ajouter un livre\n");
         printf("2 : Afficher les livres\n");
         printf("3 : Rechercher un livre\n");
+        printf("4 : Supprimer un livre\n");
         printf("0 : Quitter\n");
         printf("Saisissez votre choix : ");
 
-        choixMenu = lireChoixMenu(saisie, sizeof saisie, 4);
+        choixMenu = lireChoixMenu(saisie, sizeof saisie, 5);
 
         switch (choixMenu) {
             case -1:
@@ -56,6 +57,10 @@ void lancerMenuPrincipal(Mediatheque *mediatheque) {
             case 3:
                 /** Fonction à créer dans src/rechercher.c */
                 rechercher(mediatheque);
+                break;
+
+            case 4:
+                afficherMenuSuppression(mediatheque);
                 break;
 
             case 0:
