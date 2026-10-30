@@ -36,6 +36,15 @@ void trier(Mediatheque *mediatheque);
 
 void triBulles(Mediatheque *mediatheque);
 
+/** Emprunt de livres (src/emprunter.c) */
+/**
+ * @brief Emprunte un livre de la mediatheque a partir de son identifiant.
+ * @param mediatheque Pointeur vers la mediatheque a modifier.
+ * @param idCible Identifiant unique du livre a emprunter.
+ * @return 1 si l'emprunt reussit, 0 si le livre est introuvable ou deja emprunte.
+ */
+int emprunterLivre(Mediatheque *mediatheque, int idCible);
+
 /** Sous-menus (src/menu.c) */
 /**
  * @brief Affiche les choix du sous-menu d affichage.
