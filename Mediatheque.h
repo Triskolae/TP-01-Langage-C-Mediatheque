@@ -62,6 +62,14 @@ int rendreLivre(Mediatheque *mediatheque, int idCible);
 /** @brief Gere la selection et la confirmation du retour d'un livre. */
 void gererRetour(Mediatheque *mediatheque);
 
+/** Statistiques de la mediatheque (src/statistiques.c) */
+/**
+ * @brief Affiche le nombre total, disponible et emprunte de livres.
+ * @param mediatheque Pointeur constant vers la mediatheque a consulter.
+ * @note Ne modifie pas la collection.
+ */
+void afficherStatistiques(const Mediatheque *mediatheque);
+
 /** Sous-menus (src/menu.c) */
 /**
  * @brief Affiche les choix du sous-menu d affichage.

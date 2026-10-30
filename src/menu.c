@@ -34,10 +34,11 @@ void lancerMenuPrincipal(Mediatheque *mediatheque) {
         printf("5 : Trier la mediathèque\n");
         printf("6 : Emprunter un livre\n");
         printf("7 : Rendre un livre\n");
+        printf("8 : Statistiques de la mediatheque\n");
         printf("0 : Quitter\n");
         printf("Saisissez votre choix : ");
 
-        choixMenu = lireChoixMenu(saisie, sizeof saisie, 8);
+        choixMenu = lireChoixMenu(saisie, sizeof saisie, 9);
 
         switch (choixMenu) {
             case -1:
@@ -76,6 +77,10 @@ void lancerMenuPrincipal(Mediatheque *mediatheque) {
 
             case 7:
                 gererRetour(mediatheque);
+                break;
+
+            case 8:
+                afficherStatistiques(mediatheque);
                 break;
 
             case 0:
