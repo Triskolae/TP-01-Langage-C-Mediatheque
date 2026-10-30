@@ -48,7 +48,18 @@ void gererEmprunt(Mediatheque *mediatheque);
  */
 int selectionnerLivre(Mediatheque *mediatheque);
 /** @brief Affiche le sous-menu de recherche pour une operation. */
-void afficherMenuRechercheEmprunt(void);
+void afficherMenuSelectionLivre(void);
+
+/** Retour de livres (src/rendre.c) */
+/**
+ * @brief Rend un livre actuellement emprunte.
+ * @param mediatheque Mediatheque a modifier.
+ * @param idCible Identifiant du livre a rendre.
+ * @return 1 si le retour reussit, 0 sinon.
+ */
+int rendreLivre(Mediatheque *mediatheque, int idCible);
+/** @brief Gere la selection et la confirmation du retour d'un livre. */
+void gererRetour(Mediatheque *mediatheque);
 
 /** Sous-menus (src/menu.c) */
 /**

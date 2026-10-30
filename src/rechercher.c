@@ -90,7 +90,7 @@ void rechercherParId(const Mediatheque *mediatheque) {
  * @param champ Champ textuel utilise pour la recherche.
  */
 /** La recherche textuelle peut correspondre a plusieurs livres :
- *  le parcours ne s'arrete pas a la premiere correspondance. */
+ *  le parcours ne s arrete pas a la premiere correspondance. */
 void rechercherParChampTexte(const Mediatheque *mediatheque, ChampTexte champ) {
     bool livreTrouve = false;
     const char *nomChamp = (champ == CHAMP_AUTEUR) ? "l'auteur" : "le titre";
@@ -149,14 +149,14 @@ int selectionnerLivre(Mediatheque *mediatheque) {
     }
 
     char saisie[100];
-    afficherMenuRechercheEmprunt();
+    afficherMenuSelectionLivre();
     short choix = lireChoixMenu(saisie, sizeof(saisie), 4);
     if (choix <= 0) {
         return 0;
     }
 
     if (choix == 1) {
-        printf("ID du livre a emprunter : ");
+        printf("ID du livre recherche : ");
         int id = lireInt(saisie, sizeof(saisie));
         if (id <= 0 || chercherIndiceParId(mediatheque, id) < 0) {
             printf("Livre introuvable ou ID invalide.\n");
