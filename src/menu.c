@@ -32,10 +32,11 @@ void lancerMenuPrincipal(Mediatheque *mediatheque) {
         printf("3 : Rechercher un livre\n");
         printf("4 : Supprimer un livre\n");
         printf("5 : Trier la mediathèque\n");
+        printf("6 : Emprunter un livre\n");
         printf("0 : Quitter\n");
         printf("Saisissez votre choix : ");
 
-        choixMenu = lireChoixMenu(saisie, sizeof saisie, 6);
+        choixMenu = lireChoixMenu(saisie, sizeof saisie, 7);
 
         switch (choixMenu) {
             case -1:
@@ -66,6 +67,10 @@ void lancerMenuPrincipal(Mediatheque *mediatheque) {
                 
             case 5:
                 trier(mediatheque);
+                break;
+
+            case 6:
+                gererEmprunt(mediatheque);
                 break;
 
             case 0:
@@ -128,5 +133,18 @@ void afficherMenuCorrection(void) {
     printf("3 : Corriger la description\n");
     printf("4 - Corriger l'année\n");
     printf("0 : Revenir au recapitulatif\n");
+    printf("Saisissez votre choix : ");
+}
+
+/**
+ * @brief Affiche les criteres de recherche d'un livre a emprunter.
+ */
+void afficherMenuRechercheEmprunt(void) {
+    printf("\n========== EMPRUNTER UN LIVRE ==========\n");
+    printf("Comment souhaitez-vous rechercher le livre ?\n");
+    printf("1 : Par ID\n");
+    printf("2 : Par titre\n");
+    printf("3 : Par auteur\n");
+    printf("0 : Retour au menu principal\n");
     printf("Saisissez votre choix : ");
 }
