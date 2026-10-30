@@ -79,7 +79,7 @@ void lancerMenuPrincipal(Mediatheque *mediatheque) {
                 break;
 
             case 0:
-                printf("\nFermeture de la médiathèque.\n");
+                printf("\nFermeture de la médiathèque.\nAu revoir !\n");
                 break;
         }
 
