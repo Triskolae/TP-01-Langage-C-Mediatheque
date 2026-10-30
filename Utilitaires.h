@@ -3,6 +3,22 @@
 #ifndef UTILITAIRES_H
 #define UTILITAIRES_H
 
+/**
+ * @brief Convertit une chaîne de caractères en minuscules.
+ *
+ * Alloue dynamiquement une copie de la chaîne fournie, puis convertit
+ * chacun de ses caractères en minuscule.
+ *
+ * La chaîne originale n'est pas modifiée.
+ *
+ * @param str Pointeur vers la chaîne de caractères à convertir.
+ *
+ * @return Un pointeur vers la nouvelle chaîne convertie en minuscules.
+ * @return NULL si l'allocation mémoire échoue.
+ *
+ * @note La mémoire allouée doit être libérée par l'appelant à l'aide de free().
+ * @note La chaîne retournée doit être libérée même après utilisation.
+ */
 char* convertirChaineMin(const char *str);
 
 /** Lecture des saisies (src/lire.c) */

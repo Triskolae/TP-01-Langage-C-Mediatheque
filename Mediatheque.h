@@ -27,14 +27,76 @@ typedef struct {
  */
 void ajouterLivre(Mediatheque *mediatheque);
 
+/**
+ * @brief Recherche l'indice d'un livre à partir de son identifiant.
+ *
+ * Parcourt la collection de la médiathèque afin de retrouver le livre
+ * correspondant à l'identifiant fourni.
+ *
+ * @param mediatheque Pointeur vers la médiathèque dans laquelle effectuer la recherche.
+ * @param idRecherche Identifiant du livre recherché.
+ *
+ * @return L'indice du livre dans le tableau s'il est trouvé, -1 sinon.
+ */
 int chercherIndiceParId(Mediatheque *mediatheque, int idRecherche);
 
+/**
+ * @brief Affiche le menu de suppression d'un media.
+ *
+ * Vérifie la saisie de l'utilisateur et propose la suppression de l'élément choisi.
+ *
+ * @param mediatheque Pointeur vers la médiathèque dans laquelle effectuer la suppression.
+ */
 void supprimer(Mediatheque *mediatheque);
 
+/**
+ * @brief Supprime un média à partir de son indice dans la collection.
+ *
+ * Supprime le média situé à l'indice indiqué et réorganise la collection
+ * afin de conserver un tableau sans emplacement vide entre les éléments.
+ *
+ * @param mediatheque Pointeur vers la médiathèque concernée.
+ * @param indice Indice du média à supprimer dans le tableau.
+ */
 void supprimerMedia(Mediatheque *mediatheque, int indice);
 
+/**
+ * @brief Propose à l'utilisateur de trier la médiathèque par titre.
+ *
+ * Affiche un menu permettant à l'utilisateur de choisir s'il souhaite
+ * effectuer un tri alphabétique des médias.
+ *
+ * Si l'utilisateur confirme son choix, la fonction appelle triBulles()
+ * pour effectuer le tri. Dans le cas contraire, le tri est annulé.
+ *
+ * @param mediatheque Pointeur vers la médiathèque à trier.
+ */
 void trier(Mediatheque *mediatheque);
 
+/**
+ * @brief Trie les médias de la médiathèque par ordre alphabétique de titre.
+ *
+ * Utilise l'algorithme de tri à bulles (Bubble Sort) pour classer les médias
+ * selon leur titre, sans tenir compte de la différence entre majuscules
+ * et minuscules.
+ *
+ * À chaque itération, deux titres consécutifs sont comparés. Si le premier
+ * est alphabétiquement supérieur au second, les deux médias sont échangés.
+ *
+ * Une fois le tri terminé, un message de confirmation est affiché.
+ *
+ * @param mediatheque Pointeur vers la médiathèque contenant les médias à trier.
+ *
+ * @note Le tri est effectué directement dans le tableau collection.
+ * @note La complexité temporelle de cet algorithme est O(n²).
+ * @note La comparaison des titres est réalisée après conversion temporaire
+ *       des chaînes en minuscules.
+ *
+ * @see convertirChaineMin()
+ *
+ * @author Algorithme de tri à bulles adapté depuis :
+ *         https://coddy.tech/visualize/sorting/bubble-sort
+ */
 void triBulles(Mediatheque *mediatheque);
 
 /** Emprunt de livres (src/emprunter.c) */
@@ -42,12 +104,15 @@ void triBulles(Mediatheque *mediatheque);
  *  @return 1 si l'emprunt reussit, 0 sinon.
  */
 int emprunterLivre(Mediatheque *mediatheque, int idCible);
+
 /** @brief Gere la selection et la confirmation de l'emprunt. */
 void gererEmprunt(Mediatheque *mediatheque);
+
 /** @brief Selectionne un livre par ID, titre ou auteur.
  *  @return ID choisi, ou 0 en cas d'annulation ou d'echec.
  */
 int selectionnerLivre(Mediatheque *mediatheque);
+
 /** @brief Affiche le sous-menu de recherche pour une operation. */
 void afficherMenuSelectionLivre(void);
 
